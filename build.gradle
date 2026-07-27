@@ -24,7 +24,26 @@ dependencies {
 test {
     useJUnitPlatform()
     testLogging {
-        events 'passed', 'skipped', 'failed'
+        events "started", "passed", "skipped", "failed"
         showStandardStreams = true
+        exceptionFormat "short"
+
+        // This makes it look like a real test runner
+        showCauses true
+        showExceptions true
+        showStackTraces true
     }
+
+    // Optional: clean summary like Maven
+    afterSuite { desc, result ->
+        if (!desc.parent) {
+            println "\n======================"
+            println "TEST RESULTS"
+            println "Tests run: ${result.testCount}"
+            println "Passed: ${result.successfulTestCount}"
+            println "Failed: ${result.failedTestCount}"
+            println "Skipped: ${result.skippedTestCount}"
+            println "======================"
+        }
+    } 
 }
