@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -36,12 +38,17 @@ class TransactionTest {
         ));
     }
 
-    @Test
-    void rejects_non_positive_amount() {
+    @ParameterizedTest(name = "amount \"{0}\" is rejected as non-positive")
+    @CsvSource({
+        "-1.00",
+        "0.00",
+        "-0.01"
+    })
+    void rejects_non_positive_amount(String amount) {
         assertThrows(IllegalArgumentException.class, () -> new Transaction(
             "txn-synth-001",
             "acct-synth-001",
-            new BigDecimal("-1.00"),
+            new BigDecimal(amount),
             "Office Depot",
             LocalDate.of(2026, 3, 1)
         ));

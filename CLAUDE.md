@@ -30,5 +30,6 @@ These are project-mandated and apply to all new Java code:
 - **Identifiers**: `String` (UUID v4, or a prefixed synthetic ID). Never `int`/`long` for IDs.
 - **Dates/times**: `LocalDate` for calendar dates, `Instant` for timestamps. No `java.util.Date`, `java.sql.Date`, or `Calendar`.
 - **Fields & classes**: default to `private final` fields and `final` classes. No Lombok, no `@Data`.
+- **JavaDoc**: Always add JavaDocs for all classes and method in src folder.
 - **Tests**: JUnit 5 (`@Test`, `assertEquals`, `assertTrue`, `assertThrows`, `@BeforeEach`) — not JUnit 4, not AssertJ/Hamcrest unless added deliberately.
 - **Package root**: `com.uptimecrew.expense_tracking` for all main sources.

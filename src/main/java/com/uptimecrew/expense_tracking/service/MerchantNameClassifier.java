@@ -17,6 +17,15 @@ public final class MerchantNameClassifier implements TransactionClassifier {
             "OFFICE", "STAPLES", "UBER", "LYFT", "DELTA", "MARRIOTT", "AWS", "ADOBE"
     );
 
+    /**
+     * Classifies the transaction as {@link TransactionKind#DEDUCTIBLE} if its merchant name
+     * contains one of {@link #DEDUCTIBLE_MERCHANT_KEYWORDS} (case-insensitive), otherwise
+     * {@link TransactionKind#NON_DEDUCTIBLE}.
+     *
+     * @param transaction the transaction to classify; must not be null
+     * @return the resulting classification
+     * @throws NullPointerException if {@code transaction} is null
+     */
     @Override
     public TransactionKind classify(Transaction transaction) {
         Objects.requireNonNull(transaction, "transaction must not be null");
